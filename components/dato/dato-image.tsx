@@ -11,7 +11,7 @@ interface DatoImageProps {
   layout?: "intrinsic" | "fixed" | "responsive" | "fill";
   objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
   objectPosition?: string;
-  placeholder?: "blur" | "none";
+  usePlaceholder?: boolean;
 }
 
 /**
@@ -52,7 +52,7 @@ export function DatoImage({
   layout = "responsive",
   objectFit = "cover",
   objectPosition = "center",
-  placeholder = "blur",
+  usePlaceholder = true,
 }: DatoImageProps) {
   if (!data) {
     return null;
@@ -67,7 +67,7 @@ export function DatoImage({
       layout={layout}
       objectFit={objectFit}
       objectPosition={objectPosition}
-      placeholder={placeholder}
+      usePlaceholder={usePlaceholder}
     />
   );
 }

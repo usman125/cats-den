@@ -37,7 +37,6 @@ export function StructuredTextRenderer({
         customNodeRules={[
           // Headings
           renderNodeRule(isHeading, ({ node, children, key }) => {
-            const Tag = `h${node.level}` as keyof JSX.IntrinsicElements;
             const headingClasses: Record<number, string> = {
               1: "font-heading text-4xl font-bold text-charcoal mb-6",
               2: "font-heading text-3xl font-bold text-charcoal mb-5 mt-10",
@@ -46,11 +45,23 @@ export function StructuredTextRenderer({
               5: "font-heading text-lg font-medium text-charcoal mb-2 mt-4",
               6: "font-heading text-base font-medium text-charcoal mb-2 mt-4",
             };
-            return (
-              <Tag key={key} className={headingClasses[node.level]}>
-                {children}
-              </Tag>
-            );
+            const className = headingClasses[node.level];
+            
+            switch (node.level) {
+              case 1:
+                return <h1 key={key} className={className}>{children}</h1>;
+              case 2:
+                return <h2 key={key} className={className}>{children}</h2>;
+              case 3:
+                return <h3 key={key} className={className}>{children}</h3>;
+              case 4:
+                return <h4 key={key} className={className}>{children}</h4>;
+              case 5:
+                return <h5 key={key} className={className}>{children}</h5>;
+              case 6:
+              default:
+                return <h6 key={key} className={className}>{children}</h6>;
+            }
           }),
 
           // Paragraphs
